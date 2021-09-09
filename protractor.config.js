@@ -6,19 +6,19 @@ exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
     // directConnect: true,  
     baseUrl: 'https://www.onliner.by/',
-    capabilities: {
-        browserName: 'chrome',
-
-        shardTestFiles: true,
-        maxInstances: 2,
-    },
+    // capabilities: {
+    //     browserName: 'safari',
+        
+    //     shardTestFiles: true,
+    //     maxInstances: 2,
+    // },
     multiCapabilities: [{
         browserName: 'chrome',
     }, {
-        browserName: 'firefox'
+        browserName: 'safari'
     }],
-        // shardTestFiles: true,
-        // maxInstances: 2,
+        shardTestFiles: true,
+        maxInstances: 2,
 
     specs: [
         `jasmine_e2e/${yargs.spec || "/*.js"}`

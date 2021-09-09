@@ -2,19 +2,19 @@ const { browser } = require('protractor');
 const EC = protractor.ExpectedConditions;
 const ServicesPage = require('../po/pages/ServicesPage.js')
 const servicesPage = new ServicesPage();
-// const driver = require("selenium-webdriver");
 
 describe("Services Page", () => {
 
     beforeEach(async () => {
         await browser.manage().deleteAllCookies();
         await browser.get('https://s.onliner.by/tasks');
+        await browser.driver.manage().window().maximize();
     });
 
     describe("PAGE TITLE AND URL VERIFICATION", () => {
 
         it(`verify that Services Page title is equal to the 'Заказы на услуги'`, async () => {
-            const pageTitle = await browser.driver.getTitle();
+            const pageTitle = await browser.getTitle();
 
             return expect(pageTitle).toEqual('Заказы на услуги');
         });
@@ -26,7 +26,7 @@ describe("Services Page", () => {
         it(`verify style on hover`, async () => {
             const subcontractor = await servicesPage.Services.Subcontractors;
 
-            await browser.driver.actions().mouseMove(subcontractor).perform();
+            await browser.actions().mouseMove(subcontractor).perform();
 
             return expect((subcontractor).getCssValue('text-decoration-color')).toBe('rgb(0, 102, 204)');
             
@@ -35,8 +35,6 @@ describe("Services Page", () => {
 
         it(`verify href`, async () => {
             const subcontractor = await servicesPage.Services.Subcontractors;
-
-            await browser.driver.actions().mouseMove(subcontractor).perform();
 
             return expect(subcontractor.getAttribute('href')).toEqual('https://s.onliner.by/profiles');
             
@@ -52,7 +50,7 @@ describe("Services Page", () => {
     
                 await filter.click();
     
-                return browser.driver.isElementPresent(result);
+                return browser.isElementPresent(result);
     
             });
 
